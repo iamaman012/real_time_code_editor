@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useRef, useEffect } from "react";
 import Client from "../components/Client";
 import Editor from "../components/Editor";
+import Landing from "../components/Landing";
 import ACTIONS from "../Actions";
 import toast from "react-hot-toast";
 import { initSocket } from "../socket.js";
@@ -113,7 +114,8 @@ const EditorPage = () => {
         <button className="btn leaveBtn" onClick={leaveRoom} >Leave</button>
       </div>
       <div className="editorWrap">
-        <Editor socketRef={socketRef} roomId={roomId} />
+        {/* <Editor socketRef={socketRef} roomId={roomId} /> */}
+        <Landing />
       </div>
     </div>
   );
