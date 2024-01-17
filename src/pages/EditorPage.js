@@ -115,7 +115,7 @@ const EditorPage = () => {
       </div>
       <div className="editorWrap">
         {/* <Editor socketRef={socketRef} roomId={roomId} /> */}
-        <Landing />
+        <Landing socketRef={socketRef} roomId={roomId} />
       </div>
     </div>
   );

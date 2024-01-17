@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import CodeEditorWindow from "./CodeEditorWindow";
 import axios from "axios";
 import { classnames } from "../utils/general";
@@ -15,6 +15,8 @@ import CustomInput from "./CustomInput";
 import OutputDetails from "./OutputDetails";
 import ThemeDropdown from "./ThemeDropdown";
 import LanguagesDropdown from "./LanguagesDropdown";
+import ACTIONS from "../Actions";
+import { useSocket } from "../context/SocketContext";
 
 const javascriptDefault = `/**
 * Problem: Binary Search: Search a sorted array for a target value.
@@ -46,8 +48,9 @@ const target = 5;
 console.log(binarySearch(arr, target));
 `;
 
-const Landing = () => {
-  const [code, setCode] = useState(javascriptDefault);
+const Landing = ({ socketRef, roomId }) => {
+  // const [code, setCode] = useState("");
+  const [code, setCode] = useSocket();
   const [customInput, setCustomInput] = useState("");
   const [outputDetails, setOutputDetails] = useState(null);
   const [processing, setProcessing] = useState(null);
@@ -69,10 +72,12 @@ const Landing = () => {
       handleCompile();
     }
   }, [ctrlPress, enterPress]);
+
   const onChange = (action, data) => {
     switch (action) {
       case "code": {
         setCode(data);
+
         break;
       }
       default: {
@@ -230,6 +235,9 @@ const Landing = () => {
             onChange={onChange}
             language={language?.value}
             theme={theme.value}
+            socketRef={socketRef}
+            roomId={roomId}
+            setCode
           />
         </div>
 
