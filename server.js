@@ -45,10 +45,10 @@ io.on("connection", (socket) => {
     console.log(code);
     socket.in(roomId).emit(ACTIONS.CODE_CHANGE, { code });
   });
-  socket.on("languageChange", ({ roomId, sl }) => {
-    console.log("hi");
-    socket.in(roomId).emit("languageChange", { sl });
-  });
+  // socket.on("languageChange", ({ roomId, sl }) => {
+  //   console.log("hi");
+  //   socket.in(roomId).emit("languageChange", { sl });
+  // });
 
   socket.on("disconnecting", () => {
     const rooms = [...socket.rooms];
