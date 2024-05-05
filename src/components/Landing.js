@@ -17,6 +17,7 @@ import ThemeDropdown from "./ThemeDropdown";
 import LanguagesDropdown from "./LanguagesDropdown";
 import ACTIONS from "../Actions";
 import { useSocket } from "../context/SocketContext";
+import SpeechToText from "./SpeechToText";
 
 const javascriptDefault = `/**
 * Problem: Binary Search: Search a sorted array for a target value.
@@ -62,6 +63,7 @@ const Landing = ({ socketRef, roomId }) => {
 
   const onSelectChange = (sl) => {
     console.log("selected Option...", sl);
+
     setLanguage(sl);
   };
 
@@ -222,10 +224,13 @@ const Landing = ({ socketRef, roomId }) => {
       <div className="h-4 w-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"></div>
       <div className="flex flex-row">
         <div className="px-4 py-2">
-          <LanguagesDropdown onSelectChange={onSelectChange} />
+          <LanguagesDropdown onSelectChange={onSelectChange} socketRef={socketRef} roomId={roomId} />
         </div>
         <div className="px-4 py-2">
           <ThemeDropdown handleThemeChange={handleThemeChange} theme={theme} />
+        </div>
+        <div className="px-4 py-2">
+          <SpeechToText socketRef={socketRef} roomId={roomId} />
         </div>
       </div>
       <div className="flex flex-row space-x-4 items-start px-4 py-4">

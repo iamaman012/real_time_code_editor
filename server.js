@@ -49,6 +49,10 @@ io.on("connection", (socket) => {
   //   console.log("hi");
   //   socket.in(roomId).emit("languageChange", { sl });
   // });
+  socket.on("languageChange", ({ roomId, language }) => {
+    console.log(language);
+    socket.in(roomId).emit("languageChange", { language });
+  });
 
   socket.on("disconnecting", () => {
     const rooms = [...socket.rooms];

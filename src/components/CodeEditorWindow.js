@@ -3,6 +3,7 @@ import ACTIONS from "../Actions";
 
 import Editor from "@monaco-editor/react";
 import { useSocket } from "../context/SocketContext";
+import { useCode } from "../context/CodeContext";
 
 const CodeEditorWindow = ({
   onChange,
@@ -13,7 +14,7 @@ const CodeEditorWindow = ({
   roomId,
 }) => {
   const [code, setCode] = useSocket();
-  const [value, setValue] = useState(code || "");
+  const [value, setValue] = useCode();
 
   useEffect(() => {
     if (socketRef.current) {

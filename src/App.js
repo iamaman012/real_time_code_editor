@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import Home from "./pages/Home";
 import EditorPage from "./pages/EditorPage";
 import { SocketProvider } from "./context/SocketContext";
+import { CodeProvider } from "./context/CodeContext";
 
 function App() {
   return (
@@ -23,10 +24,12 @@ function App() {
 
       <BrowserRouter>
         <SocketProvider>
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/editor/:roomId" element={<EditorPage />}></Route>
-          </Routes>
+          <CodeProvider>
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/editor/:roomId" element={<EditorPage />}></Route>
+            </Routes>
+          </CodeProvider>
         </SocketProvider>
       </BrowserRouter>
     </>
