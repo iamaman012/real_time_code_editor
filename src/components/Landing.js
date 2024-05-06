@@ -224,10 +224,18 @@ const Landing = ({ socketRef, roomId }) => {
       <div className="h-4 w-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"></div>
       <div className="flex flex-row">
         <div className="px-4 py-2">
-          <LanguagesDropdown onSelectChange={onSelectChange} socketRef={socketRef} roomId={roomId} />
+          <LanguagesDropdown
+            onSelectChange={onSelectChange}
+            socketRef={socketRef}
+            roomId={roomId}
+          />
         </div>
         <div className="px-4 py-2">
-          <ThemeDropdown handleThemeChange={handleThemeChange} theme={theme} />
+          <ThemeDropdown
+            handleThemeChange={handleThemeChange}
+            socketRef={socketRef}
+            roomId={roomId}
+          />
         </div>
         <div className="px-4 py-2">
           <SpeechToText socketRef={socketRef} roomId={roomId} />
@@ -257,7 +265,7 @@ const Landing = ({ socketRef, roomId }) => {
               onClick={handleCompile}
               disabled={!code}
               className={classnames(
-                "mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0",
+                "btn compileBtn",
                 !code ? "opacity-50" : ""
               )}
             >

@@ -53,6 +53,10 @@ io.on("connection", (socket) => {
     console.log(language);
     socket.in(roomId).emit("languageChange", { language });
   });
+  socket.on("themeChange", ({ roomId, theme }) => {
+    console.log(theme);
+    socket.in(roomId).emit("themeChange", { theme });
+  });
 
   socket.on("disconnecting", () => {
     const rooms = [...socket.rooms];

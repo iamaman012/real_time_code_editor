@@ -51,16 +51,18 @@ footer{
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   font-weight: bold;
+  color: #110909;
 
 }
-.joinBtn,.leaveBtn{
+.joinBtn,.leaveBtn,.copyBtn,.compileBtn{
   background:#4aed88 ;
   width: 100px;
   margin-left: auto;
 }
-.joinBtn:hover ,.leaveBtn:hover{
+.joinBtn:hover ,.leaveBtn:hover,.copyBtn:hover,.compileBtn:hover{
   background: #2b824c;
 }
+
 .createInfo{
   
   margin: 0 auto;
@@ -119,7 +121,7 @@ footer{
 .logoImg{
   height: 60px;
 }
-.leaveBtn{
+.leaveBtn,.copyBtn,.compileBtn{
   margin-top: 20px;
   width: 100%;
 }
