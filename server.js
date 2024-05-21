@@ -1,6 +1,6 @@
 const cors = require("cors");
 const express = require("express");
-const ACTIONS = require("./src/Actions");
+// const ACTIONS = require("./src/Actions");
 const app = express();
 
 const http = require("http"); // it is inbuilt in node
@@ -29,21 +29,21 @@ function getAllConnectedClients(roomId) {
 
 io.on("connection", (socket) => {
   console.log("socket connected", socket.id);
-  socket.on(ACTIONS.JOIN, ({ roomId, username }) => {
+  socket.on("join", ({ roomId, username }) => {
     userSocketMap[socket.id] = username;
     socket.join(roomId);
     const clients = getAllConnectedClients(roomId);
     clients.forEach(({ socketId }) => {
-      io.to(socketId).emit(ACTIONS.JOINED, {
+      io.to(socketId).emit("joined", {
         clients,
         username,
         socketId: socket.id,
       });
     });
   });
-  socket.on(ACTIONS.CODE_CHANGE, ({ roomId, code }) => {
+  socket.on("code-change", ({ roomId, code }) => {
     console.log(code);
-    socket.in(roomId).emit(ACTIONS.CODE_CHANGE, { code });
+    socket.in(roomId).emit("code-change", { code });
   });
   // socket.on("languageChange", ({ roomId, sl }) => {
   //   console.log("hi");
@@ -61,7 +61,7 @@ io.on("connection", (socket) => {
   socket.on("disconnecting", () => {
     const rooms = [...socket.rooms];
     rooms.forEach((roomId) => {
-      socket.in(roomId).emit(ACTIONS.DISSCONNECT, {
+      socket.in(roomId).emit("disconnect", {
         socketId: socket.id,
         username: userSocketMap[socket.id],
       });
@@ -72,7 +72,7 @@ io.on("connection", (socket) => {
   socket.on("leaving", () => {
     const rooms = [...socket.rooms];
     rooms.forEach((roomId) => {
-      socket.in(roomId).emit(ACTIONS.DISSCONNECT, {
+      socket.in(roomId).emit("disconnected", {
         socketId: socket.id,
         username: userSocketMap[socket.id],
       });
